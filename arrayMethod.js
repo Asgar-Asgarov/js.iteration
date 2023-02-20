@@ -67,21 +67,43 @@ function sorting ()
     document.getElementById("apple").innerText="Sorted form of names :"+ sort;
 }
 
-function clear() {
-    document.getElementById("apple").innerText="Choose the proccess"
-}
+// function clear() {
+//     document.getElementById("apple").innerText="Choose the proccess"
+// }
 
-document.getElementById("write").addEventListener("click",firstname);
-document.getElementById("sorting").addEventListener("click",sorting);
-document.getElementById("clear").addEventListener("click",clear);
+// document.getElementById("write").addEventListener("click",firstname);
+// document.getElementById("sorting").addEventListener("click",sorting);
+// document.getElementById("clear").addEventListener("click",clear);
 //  const firstname = characters.map(character=>character.name.split(' ')[0])
 //  console.log(firstname);
 
 //***REDUCE***
 //1. Get total mass of all characters
+const totalMass= characters.reduce((acc,cur)=>
+{ return acc+cur.mass  },0);
+console.log(totalMass);
 //2. Get total height of all characters
+ const totalHeight = characters.reduce((start,character)=>{
+    return start + character.height
+ },0);
+ console.log(totalHeight);
 //3. Get total number of characters by eye color
+const numberEye = characters.reduce((num,cur)=>{
+    const color = cur.eye_color;    
+    if (num[color]) {
+        num[color]++;
+    }
+    else{
+        num[color]=1;
+    }
+  return num;
+},{});
+console.log(numberEye);
 //4. Get total number of characters in all the character names
+  const numberOfCharacters = characters.reduce(
+    (acc,cur)=>acc+cur.name.length
+  ,0);
+  console.log(numberOfCharacters);
 
 //***FILTER***
 //1. Get characters with mass greater than 100
@@ -114,7 +136,7 @@ return -1; })
 //4. Sort by gender
 const byGender = characters.sort((character)=>{if(character.gender==='female') return 1;
 return -1; })
-console.log(byGender);
+
 
 //***EVERY***
 //1. Does every character have blue eyes?
